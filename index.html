@@ -1,15 +1,60 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<link href="publication-web-resources/css/main.css" rel="stylesheet" type="text/css">
-		</link>
-		<script src="publication-web-resources/script/main.js" type="text/javascript">
-		</script>
-	</head>
-	<body onload="showHideArrows()">
-		<iframe onload="showHideArrows()" id="contentIFrame" class="contentIframeClass" src="publication-web-resources/html/publication.html">		</iframe>
-		<iframe id="dummyIFrame" class="dummyFrameClass">		</iframe>
-		<div class="prev" onclick="showPreviousPage()">		&#10094;		</div>
-		<div class="next" onclick="showNextPage()">		&#10095;		</div>
-	</body>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="publication-web-resources/css/main.css" rel="stylesheet" type="text/css">
+    <script src="publication-web-resources/script/main.js" type="text/javascript"></script>
+    <style>
+        /* Forzamos que el navegador no tenga márgenes y no haga scroll lateral */
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden; /* Evita doble scroll */
+            background-color: #ffffff;
+        }
+
+        /* Hacemos que el iFrame ocupe toda la pantalla del móvil */
+        #contentIFrame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw !important;
+            height: 100vh !important;
+            border: none !important;
+        }
+
+        /* Estilo para las flechas por si quieres mantenerlas, pero que no estorben */
+        .prev, .next {
+            z-index: 10;
+            user-select: none;
+        }
+    </style>
+</head>
+<body onload="showHideArrows()">
+    <!-- Añadimos 'scrolling="yes"' para que el cliente pueda bajar por la carta -->
+    <iframe onload="showHideArrows()" 
+            id="contentIFrame" 
+            class="contentIframeClass" 
+            src="publication-web-resources/html/publication.html" 
+            frameborder="0" 
+            scrolling="yes">
+    </iframe>
+
+    <iframe id="dummyIFrame" class="dummyFrameClass" style="display:none;"></iframe>
+    
+    <div class="prev" onclick="showPreviousPage()"> ❮ </div>
+    <div class="next" onclick="showNextPage()"> ❯ </div>
+
+    <script>
+        // Este script fuerza al contenido dentro del iFrame a ajustarse al ancho del móvil
+        window.addEventListener('load', function() {
+            const ifrm = document.getElementById('contentIFrame');
+            ifrm.style.width = '100%';
+            ifrm.style.height = '100%';
+        });
+    </script>
+</body>
 </html>
