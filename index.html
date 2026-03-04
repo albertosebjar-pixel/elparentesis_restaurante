@@ -1,34 +1,5 @@
 <!DOCTYPE html>
 <html>
-	<style>
-  body, html {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Evita el scroll lateral */
-  }
-  #container, .document-container, #content-p { 
-    /* Busca el ID que use tu exportación de InDesign para el contenedor principal */
-    transform-origin: 0 0;
-    width: fit-content;
-  }
-</style>
-
-<script>
-  function scaleToFit() {
-    // Busca el div principal de la exportación de InDesign
-    const el = document.querySelector('div[id^="id-"]') || document.body.firstElementChild;
-    const width = el.offsetWidth;
-    const scale = window.innerWidth / width;
-    
-    if (scale < 1) { // Solo reduce si es más ancho que la pantalla
-      el.style.transform = `scale(${scale})`;
-      el.style.transformOrigin = "0 0";
-    }
-  }
-  window.onload = scaleToFit;
-  window.onresize = scaleToFit;
-</script>
-
 	<head>
 		<link href="publication-web-resources/css/main.css" rel="stylesheet" type="text/css">
 		</link>
